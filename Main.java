@@ -16,12 +16,13 @@ public class Main {
 
         Hero hero1 = new Hero(lv1.allRooms.get(0));
         hero1.getCurrentRoom().printPossibleRooms();
-        System.out.println("Which room :");
+
         prompt =scanner.next();
         hero1.move(prompt);
         System.out.println();
         System.out.println( hero1.getCurrentRoom().getName());
         hero1.getCurrentRoom().printPossibleRooms();
+        prompt =scanner.next();
         hero1.move(prompt);
 
 
