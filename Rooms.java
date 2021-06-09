@@ -61,7 +61,6 @@ public class Rooms{
         for (Rooms rooms : arrayList) {
             System.out.println(rooms.getName());
         }
-
     }
 
 

@@ -5,7 +5,7 @@ public class Main {
 
         Scanner scanner = new Scanner(System.in);
         int choice ;
-        Boolean flag = true ;
+        boolean flag = true ;
         int x ;
 
 
@@ -22,7 +22,9 @@ public class Main {
         choice = GameLogic.getOption("Which Room.\n"+hero1.getCurrentRoom().arrayList,hero1.getCurrentRoom().arrayList.size())-1;
         hero1.move(choice);
         hero1.getCurrentRoom().printPossibleRooms();
+
          /*while (flag){
+
             while(true){
 
             }

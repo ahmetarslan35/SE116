@@ -5,7 +5,11 @@ public class Corridor {
     public ArrayList<Rooms> roomsArrayList;
 
 
-    private static int roomAmount ;
+    private int roomAmount ;
+
+    public void setRoomAmount(int roomAmount) {
+        this.roomAmount = roomAmount;
+    }
 
     public int getRoomAmount() {
         return roomAmount;
@@ -23,7 +27,7 @@ public class Corridor {
         Corridor tempCorridor = new Corridor() ;
 
 
-        for(int i =0 ; i<roomAmount ; i++){
+        for(int i =0 ; i< tempCorridor.roomAmount ; i++){
             tempCorridor.roomsArrayList.add(new Rooms());
         }
         return  tempCorridor ;

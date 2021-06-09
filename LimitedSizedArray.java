@@ -2,6 +2,9 @@ import java.util.ArrayList;
 
 //Overriding the Arraylist add because Character can carry some number of items in their inventory
 class LimitedSizedArray extends ArrayList<Items> {
+
+
+
     @Override
     public boolean add(Items items) {
 

@@ -6,12 +6,16 @@ public class Hero  extends Characters {
     private Rooms currentRoom  ;
     private Level currentLevel ;
     private ArrayList<Level>  Dungeon = new ArrayList<>();
+    private LimitedSizedArray Inventory = new LimitedSizedArray();
     private int healthPoint ;
 
     public Hero() {
 
         for (int i = 0; i <16 ; i++) {
             Dungeon.add(Level.generateLevel());
+            Dungeon.get(i).setName("Level-"+(i+1));
+            System.out.println(Dungeon.get(i).getName());
+
 
         }
         this.currentRoom =Dungeon.get(0).allRooms.get(0);

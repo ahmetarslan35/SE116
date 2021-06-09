@@ -3,14 +3,23 @@ import java.util.Random;
 
 public class Level {
 
-    private static int corridorAmount;
+    private int corridorAmount;
     private static int levelNumber = 1;
+    private String name ;
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
 
     public ArrayList<Corridor> corridorArrayList;
     public ArrayList<Rooms> allRooms ;
     static Random rand  = new Random();
 
-    public  int getCorridorAmount() {
+    public int getCorridorAmount() {
         return corridorAmount;
         
     }
@@ -34,13 +43,13 @@ public class Level {
         int counter =0 ;
         int x;
 
-        for(int i =0 ; i<corridorAmount ; i++){
+        for(int i =0 ; i<tempLevel.getCorridorAmount() ; i++){
             Corridor corridor = Corridor.generateCorridor();
             tempLevel.corridorArrayList.add(corridor);
             counter += tempLevel.corridorArrayList.get(i).getRoomAmount();
         } // corridor and rooms were generated
 
-        for(int i =0 ; i<corridorAmount ; i++){
+        for(int i =0 ; i<tempLevel.getCorridorAmount() ; i++){
             Corridor corridor= tempLevel.corridorArrayList.get(i);
              for (int j = 0 ; j < corridor.roomsArrayList.size() ; j++){
                  if(j+1 != corridor.roomsArrayList.size()){
@@ -51,9 +60,9 @@ public class Level {
              }
         }// rooms that in the same corridor were linked forwardly
 
-        for(int i =0 ; i<corridorAmount ; i++){
+        for(int i =0 ; i<tempLevel.getCorridorAmount() ; i++){
 
-            if(i+1 != corridorAmount){
+            if(i+1 != tempLevel.getCorridorAmount()){
                 Corridor corridor1 = tempLevel.corridorArrayList.get(i);
                 Corridor corridor2= tempLevel.corridorArrayList.get(i+1)  ;
                 int a = rand.nextInt(corridor1.roomsArrayList.size());
@@ -64,7 +73,7 @@ public class Level {
 
         }// rooms that in the different corridors were linked randomly
 
-        for(int i= 0 ; i<corridorAmount ; i++){
+        for(int i= 0 ; i<tempLevel.getCorridorAmount() ; i++){
             Corridor corridor = tempLevel.corridorArrayList.get(i);
             for (int j =corridor.roomsArrayList.size()-1 ; j >=0 ; j--){
                 if(j+1 != corridor.roomsArrayList.size()){
@@ -75,7 +84,7 @@ public class Level {
             }
         }// rooms that in the same corridor were linked backwardly
 
-        for(int i =0 ; i <corridorAmount;i++){
+        for(int i =0 ; i <tempLevel.getCorridorAmount();i++){
             Corridor corridor = tempLevel.corridorArrayList.get(i);
             tempLevel.allRooms.addAll(corridor.roomsArrayList);
         } // all rooms were added to the arraylist for setting their name
@@ -86,17 +95,22 @@ public class Level {
 
 
         if(levelNumber<16){
-            Corridor tempCorridor = tempLevel.corridorArrayList.get(rand.nextInt(corridorAmount));
+            Corridor tempCorridor = tempLevel.corridorArrayList.get(rand.nextInt(tempLevel.getCorridorAmount()));
             x =rand.nextInt(tempCorridor.roomsArrayList.size());
             tempCorridor.roomsArrayList.get(x).setHasAUpstairs(true);
+
         } // upstairs was generated
 
         if(levelNumber > 1){
-            Corridor tempCorridor1 = tempLevel.corridorArrayList.get(rand.nextInt(corridorAmount));
+            Corridor tempCorridor1 = tempLevel.corridorArrayList.get(rand.nextInt(tempLevel.getCorridorAmount()));
             x =rand.nextInt(tempCorridor1.getRoomAmount());
             tempCorridor1.roomsArrayList.get(x).setHasADownStair(true);
+
         } // downstairs was generated
 
+
+
+        levelNumber++;
 
 
 
