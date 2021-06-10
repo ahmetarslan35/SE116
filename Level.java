@@ -17,7 +17,7 @@ public class Level {
 
     public ArrayList<Corridor> corridorArrayList;
     public ArrayList<Rooms> allRooms ;
-    static Random rand  = new Random();
+
 
     public int getCorridorAmount() {
         return corridorAmount;
@@ -29,7 +29,7 @@ public class Level {
 
 
     public Level() {
-        corridorAmount = rand.nextInt(2)+2; // amount of Corridor
+        corridorAmount = GameLogic.rand.nextInt(2)+2; // amount of Corridor
         corridorArrayList= new ArrayList<>();
         allRooms = new ArrayList<>();
 
@@ -65,8 +65,8 @@ public class Level {
             if(i+1 != tempLevel.getCorridorAmount()){
                 Corridor corridor1 = tempLevel.corridorArrayList.get(i);
                 Corridor corridor2= tempLevel.corridorArrayList.get(i+1)  ;
-                int a = rand.nextInt(corridor1.roomsArrayList.size());
-                int b = rand.nextInt(corridor2.roomsArrayList.size());
+                int a = GameLogic.rand.nextInt(corridor1.roomsArrayList.size());
+                int b = GameLogic.rand.nextInt(corridor2.roomsArrayList.size());
                 corridor1.roomsArrayList.get(a).addDoor(corridor2.roomsArrayList.get(b));
                 corridor2.roomsArrayList.get(b).addDoor(corridor1.roomsArrayList.get(a));
             }
@@ -95,15 +95,15 @@ public class Level {
 
 
         if(levelNumber<16){
-            Corridor tempCorridor = tempLevel.corridorArrayList.get(rand.nextInt(tempLevel.getCorridorAmount()));
-            x =rand.nextInt(tempCorridor.roomsArrayList.size());
+            Corridor tempCorridor = tempLevel.corridorArrayList.get(GameLogic.rand.nextInt(tempLevel.getCorridorAmount()));
+            x =GameLogic.rand.nextInt(tempCorridor.roomsArrayList.size());
             tempCorridor.roomsArrayList.get(x).setHasAUpstairs(true);
 
         } // upstairs was generated
 
         if(levelNumber > 1){
-            Corridor tempCorridor1 = tempLevel.corridorArrayList.get(rand.nextInt(tempLevel.getCorridorAmount()));
-            x =rand.nextInt(tempCorridor1.getRoomAmount());
+            Corridor tempCorridor1 = tempLevel.corridorArrayList.get(GameLogic.rand.nextInt(tempLevel.getCorridorAmount()));
+            x =GameLogic.rand.nextInt(tempCorridor1.getRoomAmount());
             tempCorridor1.roomsArrayList.get(x).setHasADownStair(true);
 
         } // downstairs was generated

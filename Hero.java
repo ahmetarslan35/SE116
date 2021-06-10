@@ -5,16 +5,28 @@ public class Hero  extends Characters {
 
     private Rooms currentRoom  ;
     private Level currentLevel ;
+    private String name ;
+
     private ArrayList<Level>  Dungeon = new ArrayList<>();
-    private LimitedSizedArray Inventory = new LimitedSizedArray();
+    private ArrayList<LimitedSizedArray> Inventory ;
     private int healthPoint ;
+
 
     public Hero() {
 
+        this.healthPoint = 50 ;
+        Inventory = new ArrayList<>();
+        LimitedSizedArray Weapon = new LimitedSizedArray();
+        LimitedSizedArray Clothing= new LimitedSizedArray();
+        Inventory.add(Weapon);
+        Inventory.add(Clothing);
+
+
+
         for (int i = 0; i <16 ; i++) {
             Dungeon.add(Level.generateLevel());
-            Dungeon.get(i).setName("Level-"+(i+1));
-            System.out.println(Dungeon.get(i).getName());
+            Dungeon.get(i).setName("Level"+(i+1));
+
 
 
         }
@@ -38,39 +50,58 @@ public class Hero  extends Characters {
         this.healthPoint = healthPoint;
     }
 
+    public String getName() {
+        return name;
+    }
 
+    public void setName(String name) {
+        this.name = name;
+    }
 
     @Override
-    public void move(int index) {
+    public void move(String roomName) {
         String exRoom =currentRoom.getName() ;
-        this.currentRoom = currentRoom.arrayList.get(index-1) ;
+        for (int i = 0; i <currentRoom.arrayList.size(); i++) {
+            if(currentRoom.arrayList.get(i).getName().equals(roomName)){
+                this.currentRoom = currentRoom.arrayList.get(i) ;
+
+
+            }
+
+        }
+
+
         System.out.println("Hero moved "+exRoom+" to "+currentRoom.getName()+".");
 
 
 
 
         }
+    public void moveUpperLevel() {
+        String exLevel =currentLevel.getName();
+        int i = Dungeon.indexOf(currentLevel);
+
+        this.currentLevel =  Dungeon.get(i+1);
+        System.out.println("Hero moved "+exLevel+" to "+currentLevel.getName()+".");
 
 
 
-    public int printOptions(){
-        int counter = 1 ;
-        for (int i = 0; i < currentRoom.arrayList.size(); i++) {
-            System.out.println("["+(i+1)+"]"+" "+currentRoom.arrayList.get(i).getName());
-            counter++ ;
-        }
-        if(currentRoom.isHasAMonster()){
-            System.out.println("["+counter+"]"+" "+"Attack Monster");
-        }
 
-        if(currentRoom.isHasAUpstairs()){
-            System.out.println("["+counter+"]"+" "+"Move to Upper Level");
-        }
-        if(currentRoom.isHasADownStairs()){
-            System.out.println("["+counter+"]"+" "+"Move to Lower Level");
-        }
-        return counter ;
     }
+    public void moveLowerLevel() {
+        String exLevel =currentLevel.getName();
+        int i = Dungeon.indexOf(currentLevel);
+
+        this.currentLevel =  Dungeon.get(i-1);
+        System.out.println("Hero moved "+exLevel+" to "+currentLevel.getName()+".");
+
+
+
+
+    }
+
+
+
 
 
 

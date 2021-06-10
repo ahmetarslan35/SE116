@@ -3,34 +3,38 @@ import java.util.Scanner;
 public class Main {
     public static void main(String[] args) {
 
-        Scanner scanner = new Scanner(System.in);
+
         int choice ;
-        boolean flag = true ;
+        boolean flag = true,inGame = true ;
         int x ;
 
 
-        Hero hero1 = new Hero();
-        x =hero1.printOptions();
-        choice = GameLogic.getOption("Which Room.\n"+hero1.getCurrentRoom().arrayList,x);
-        hero1.move(choice);
 
 
-        System.out.println();
-        System.out.println( hero1.getCurrentRoom().getName());
-        hero1.getCurrentRoom().printPossibleRooms();
+         while (flag){
+             System.out.println("-----HERO OF THE DUNGEON------");
+             Hero hero = new Hero();
+             System.out.println("Enter name :");
+             String name = GameLogic.scanner.next();
+             hero.setName(name);
+            while(inGame){
+                x =GameLogic.printAndGetOptions(hero);
+                if(x==0){
+                    System.out.println("Invalid");
+                }
+                if(x==1){
 
-        choice = GameLogic.getOption("Which Room.\n"+hero1.getCurrentRoom().arrayList,hero1.getCurrentRoom().arrayList.size())-1;
-        hero1.move(choice);
-        hero1.getCurrentRoom().printPossibleRooms();
-
-         /*while (flag){
-
-            while(true){
+                    hero.move();
+                }
+                if(x==2){}
+                if(x==3){}
+                if(x==4){}
+                if(x==5){}
 
             }
 
 
-        }*/
+        }
 
 
 

@@ -2,7 +2,7 @@ public class Monster extends Characters {
 
 
     @Override
-    public void move(int index) {
+    public void move(String roomName) {
 
     }
 }

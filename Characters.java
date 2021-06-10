@@ -18,5 +18,5 @@ abstract class Characters {
     }
 
 
-    public abstract void move(int index);
+    public abstract void move(String roomName);
 }

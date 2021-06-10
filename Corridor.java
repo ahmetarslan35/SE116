@@ -16,10 +16,9 @@ public class Corridor {
     }
 
 
-    static Random rand =new Random();
 
     public Corridor() {
-        roomAmount = rand.nextInt(3)+2;
+        roomAmount = GameLogic.rand.nextInt(3)+2;
 
         roomsArrayList = new ArrayList<>();
     }
