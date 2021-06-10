@@ -10,7 +10,6 @@ public class Main {
 
 
 
-
          while (flag){
              System.out.println("-----HERO OF THE DUNGEON------");
              Hero hero = new Hero();
@@ -18,18 +17,40 @@ public class Main {
              String name = GameLogic.scanner.next();
              hero.setName(name);
             while(inGame){
-                x =GameLogic.printAndGetOptions(hero);
-                if(x==0){
-                    System.out.println("Invalid");
-                }
-                if(x==1){
+                GameLogic.printOptions(hero);
+                String action =GameLogic.scanner.next();
+                choice =GameLogic.getOption(" ",action,hero);
+                String[]actions = action.toLowerCase().split(" ",5) ;
+                switch (choice){
+                    case 0 :{
+                        System.out.println("Invalid input!");
 
-                    hero.move();
+                    }
+                    case 1 :{
+                        hero.move(actions[3]);
+
+                    }
+                    case 2 :{
+
+
+                    }
+                    case 3 :{
+                        hero.moveUpperLevel();
+
+                    }
+                    case 4:{
+                        hero.moveLowerLevel();
+
+                    }
+                    case 5:{
+
+
+                    }
+                    case 6:{
+
+
+                    }
                 }
-                if(x==2){}
-                if(x==3){}
-                if(x==4){}
-                if(x==5){}
 
             }
 

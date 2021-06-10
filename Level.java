@@ -90,7 +90,7 @@ public class Level {
         } // all rooms were added to the arraylist for setting their name
 
         for(int i =1; i <=counter;i++){
-            tempLevel.allRooms.get(i-1).setName("Room"+i);
+            tempLevel.allRooms.get(i-1).setName("Room "+i);
         }        // all rooms has a name
 
 

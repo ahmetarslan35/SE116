@@ -25,7 +25,7 @@ public class Hero  extends Characters {
 
         for (int i = 0; i <16 ; i++) {
             Dungeon.add(Level.generateLevel());
-            Dungeon.get(i).setName("Level"+(i+1));
+            Dungeon.get(i).setName("Level "+(i+1));
 
 
 

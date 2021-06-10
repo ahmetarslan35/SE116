@@ -7,9 +7,10 @@ public class Rooms{
     private boolean hasAMonster =false;
     private boolean hasAUpstairs = false ;
     private boolean hasADownStairs = false;
+    private boolean hasATownsPeople = false ;
     private String name = "Default";
 
-    public boolean isHasAMonster() {
+    public boolean hasAMonster() {
         return hasAMonster;
     }
 
@@ -17,7 +18,7 @@ public class Rooms{
         this.hasAMonster = hasAMonster;
     }
 
-    public boolean isHasAUpstairs() {
+    public boolean hasAUpstairs() {
         return hasAUpstairs;
     }
 
@@ -25,7 +26,7 @@ public class Rooms{
         this.hasAUpstairs = hasAUpstairs;
     }
 
-    public boolean isHasADownStairs() {
+    public boolean hasADownStairs() {
         return hasADownStairs;
     }
 
@@ -33,6 +34,14 @@ public class Rooms{
         this.hasADownStairs = hasADownStairs;
     }
 
+    public boolean hasATownsPeople() {
+        return hasATownsPeople ;
+
+    }
+    public void setHasATownsPeople(boolean hasATownsPeople) {
+        this.hasATownsPeople = hasATownsPeople;
+
+    }
 
 
 
