@@ -5,50 +5,26 @@ public class GameLogic {
     static Scanner scanner = new Scanner(System.in);
     static Random rand =new Random();
 
-    public static int getOption(String prompt ,String action,Hero hero){
-        String[] actions ;
-        actions =action.toLowerCase().split(" ");
-        System.out.println(actions.toString());
-        if(actions[1].equals("move")){
-            return 1 ;
-        }
-        if(actions[1].equals("attack")){
-            return 2 ;
-        }
-        if(actions[3].equals("upper")){
-            return 3 ;
-        }
-        if(actions[3].equals("lower")){
-            return 4 ;
-        }
-        if(actions[1].equals("townspeople")){
-            return 5;
-        }
-        if(action.equals("exit")){
-            return 6 ;
 
-        }
-        return 0 ;
-    } // düzenleme lazım
     public static void printOptions(Hero hero){
-        int counter = 1 ;
         System.out.println(hero.getCurrentLevel().getName()+" "+hero.getName()+" "+hero.getCurrentRoom().getName());
+        System.out.println();
+        System.out.println("OPTIONS:");
         for (int i = 0; i < hero.getCurrentRoom().arrayList.size(); i++) {
-            System.out.println("["+(i+1)+"] Move to "+hero.getCurrentRoom().arrayList.get(i).getName());
-            counter++ ;
+            System.out.println(hero.getCurrentRoom().arrayList.get(i).getName()+"(r"+hero.getCurrentRoom().arrayList.get(i).getId()+")");
         }
         if(hero.getCurrentRoom().hasAMonster()){
-            System.out.println("["+counter+"] Attack Monster");
+            System.out.println("Attack Monster");
         }
 
         if(hero.getCurrentRoom().hasAUpstairs()){
-            System.out.println("["+counter+"] Move to Upper Level");
+            System.out.println("Upper Level(move up)");
         }
         if(hero.getCurrentRoom().hasADownStairs()){
-            System.out.println("["+counter+"] Move to Lower Level");
+            System.out.println("Lower Level(move down)");
         }
         if(hero.getCurrentRoom().hasATownsPeople()){
-            System.out.println("["+counter+"] Townspeople");
+            System.out.println("Rescue Townspeople(rescue tp)");
         }
     }
 

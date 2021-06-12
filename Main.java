@@ -3,10 +3,7 @@ import java.util.Scanner;
 public class Main {
     public static void main(String[] args) {
 
-
-        int choice ;
         boolean flag = true,inGame = true ;
-        int x ;
 
 
 
@@ -14,43 +11,45 @@ public class Main {
              System.out.println("-----HERO OF THE DUNGEON------");
              Hero hero = new Hero();
              System.out.println("Enter name :");
-             String name = GameLogic.scanner.next();
+             String name = GameLogic.scanner.nextLine();
              hero.setName(name);
             while(inGame){
                 GameLogic.printOptions(hero);
-                String action =GameLogic.scanner.next();
-                choice =GameLogic.getOption(" ",action,hero);
+                String action =GameLogic.scanner.nextLine();
+
                 String[]actions = action.toLowerCase().split(" ",5) ;
-                switch (choice){
-                    case 0 :{
-                        System.out.println("Invalid input!");
-
-                    }
-                    case 1 :{
-                        hero.move(actions[3]);
-
-                    }
-                    case 2 :{
 
 
-                    }
-                    case 3 :{
-                        hero.moveUpperLevel();
+                if(actions[0].equals("move") && actions[1].contains("r")){
+                    hero.move(actions[1]);
 
-                    }
-                    case 4:{
-                        hero.moveLowerLevel();
-
-                    }
-                    case 5:{
-
-
-                    }
-                    case 6:{
-
-
-                    }
                 }
+                else if(actions[0].equals("attack")){
+                    hero.getHealthPoint();
+
+
+                }
+                else if(actions[1].equals("up")){
+                    hero.moveUpperLevel();
+                }
+                else if(actions[1].equals("down")){
+                    hero.moveLowerLevel();
+                }
+                else if(actions[0].equals("rescue")){
+
+                }
+                else if(actions[0].equals("exit")){
+                    inGame =false ;
+                    flag = false ;
+                    break ;
+
+
+                }
+
+
+
+
+
 
             }
 

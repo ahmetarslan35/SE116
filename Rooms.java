@@ -8,8 +8,32 @@ public class Rooms{
     private boolean hasAUpstairs = false ;
     private boolean hasADownStairs = false;
     private boolean hasATownsPeople = false ;
-    private String name = "Default";
+    private String name ;
+    private int id ;
 
+
+
+
+    public Monster monster ;
+    public TownsPeople townsPeople ;
+
+    public Rooms() {
+        this.arrayList = new ArrayList<>();
+
+
+
+    }
+
+
+
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
     public boolean hasAMonster() {
         return hasAMonster;
     }
@@ -43,11 +67,6 @@ public class Rooms{
 
     }
 
-
-
-    public Monster monster ;
-    public TownsPeople townsPeople ;
-
     public String getName() {
         return name;
     }
@@ -56,10 +75,7 @@ public class Rooms{
         this.name = name;
     }
 
-    public Rooms() {
-        this.arrayList = new ArrayList<>();
 
-    }
 
     public void addDoor(Rooms tempRoom) {
         arrayList.add(tempRoom);

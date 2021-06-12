@@ -1,4 +1,7 @@
 public class Monster extends Characters {
+    private int healthPoint ;
+
+
 
 
     @Override
