@@ -29,9 +29,13 @@ public class Items {
     }
 
     //overriding the toString method to get the contents of the Items object instead of the memory locations
+
     public String toString() {
         return "[" + name + "]";
     }
 
+    public String getName() {
+        return name;
+    }
 }
 

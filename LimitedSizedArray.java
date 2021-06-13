@@ -15,6 +15,8 @@ class LimitedSizedArray extends ArrayList<Items> {
         return false;
     }
 
+
+
     public void showInventory(LimitedSizedArray LimitedSizedArray) {
         System.out.println("Here are the items in your inventory: " + LimitedSizedArray);
     }

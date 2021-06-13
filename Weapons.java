@@ -23,4 +23,9 @@ public class Weapons extends Items {
             System.out.println("It will be a very close fight! The range of this weapons is: " + range);
         }
     }
+
+    @Override
+    public String getName() {
+        return super.getName();
+    }
 }

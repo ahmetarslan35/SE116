@@ -10,16 +10,33 @@ public class Hero  extends Characters {
 
     private ArrayList<Level>  Dungeon = new ArrayList<>();
     private ArrayList<LimitedSizedArray> Inventory ;
+    private ArrayList<LimitedArray> Equipment ;
 
+    public ArrayList<LimitedArray> getEquipment() {
+        return Equipment;
+    }
+
+    public ArrayList<LimitedSizedArray> getInventory() {
+        return Inventory;
+    }
 
     public Hero() {
 
         this.healthPoint = 50 ;
         Inventory = new ArrayList<>();
-        LimitedSizedArray Weapon = new LimitedSizedArray();
-        LimitedSizedArray Clothing= new LimitedSizedArray();
-        Inventory.add(Weapon);
-        Inventory.add(Clothing);
+        Equipment = new ArrayList<>();
+        LimitedSizedArray Weapons = new LimitedSizedArray();
+        LimitedSizedArray Clothings= new LimitedSizedArray();
+        LimitedArray Weapon = new LimitedArray();
+        LimitedArray Clothing = new LimitedArray();
+
+        Inventory.add(Weapons);
+        Inventory.add(Clothings);
+        Equipment.add(Weapon);
+        Equipment.add(Clothing);
+        Weapon.add(GameLogic.getItem(0,0));
+        Clothing.add(GameLogic.getItem(1,0));
+
 
 
 
