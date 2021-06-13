@@ -5,7 +5,7 @@ class LimitedArray extends ArrayList<Items> {
     @Override
     public boolean add(Items items) {
 
-        int n = 2;
+        int n = 1;
         if (this.size() < n) {
             return super.add(items);
         }
@@ -13,6 +13,6 @@ class LimitedArray extends ArrayList<Items> {
     }
 
     public void showEquipments(LimitedArray LimitedArray) {
-        System.out.println("You equipped these: " + LimitedArray);
+        System.out.println("You equipped these: " + LimitedArray.get(0));
     }
 }

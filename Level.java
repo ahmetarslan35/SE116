@@ -1,11 +1,13 @@
 import java.util.ArrayList;
-import java.util.Random;
+import java.util.HashMap;
 
 public class Level {
 
     private int corridorAmount;
+
     private static int levelNumber = 1;
     private String name ;
+    private HashMap<String,String>RoomID = new HashMap<>();
 
     public String getName() {
         return name;
@@ -90,8 +92,14 @@ public class Level {
         } // all rooms were added to the arraylist for setting their name
 
         for(int i =1; i <=counter;i++){
-            tempLevel.allRooms.get(i-1).setName("Room "+i);
-        }        // all rooms has a name
+            tempLevel.allRooms.get(i-1).setName("Room"+i);
+        }
+
+        for(int i =1; i <=counter;i++){
+            tempLevel.allRooms.get(i-1).setId(i);
+        } // all rooms has a ID
+
+
 
 
         if(levelNumber<16){
