@@ -42,13 +42,16 @@ public class Main {
             String name = GameLogic.scanner.nextLine();
             hero.setName(name);
             System.out.println();
+            hero.getInventory().get(0).add(broadAxe);
+            hero.getInventory().get(0).add(shortBow);
+            hero.getInventory().get(1).add(leatherArmor);
+            hero.getInventory().get(1).add(lightClothing);
             while(inGame){
                 GameLogic.printOptions(hero);
                 String action =GameLogic.scanner.nextLine();
                 String[]actions = action.toLowerCase().split(" ",5) ;
                 if(actions[0].equals("open")){
                     boolean exit = true;
-
                     while(exit){
                          choice = GameLogic.getOption("[1]Equitments on Hero\n" +
                                  "[2]Weapon Inventory\n" +
@@ -78,16 +81,75 @@ public class Main {
                                          "[4]Return",4);
                                  if(option==1){
                                      hero.getInventory().get(0).showInventory(hero.getInventory().get(0));
-
                                  }
                                  else if(option==2){
-                                     System.out.println("Enter name of the weapon that in the inventory:");
-                                     String weaponName =GameLogic.scanner.nextLine();
-                                     Weapons weapons =(Weapons)GameLogic.getItem(0,weaponName);
-                                     hero.getInventory().get(0).swapWeapons(hero.getInventory().get(0),hero.getEquipment().get(0), (Weapons) hero.getEquipment().get(0).get(0),weapons);
+                                     hero.getInventory().get(0).indexOfItems(hero.getInventory().get(0));
+                                     if(hero.getInventory().get(0).size()>0){
+                                         int x=GameLogic.getOption("Pick a weapon for swap with current weapon",hero.getInventory().get(0).size());
+                                         hero.getInventory().get(0).swapWeapons(hero.getInventory().get(0),hero.getEquipment().get(0),(Weapons)hero.getInventory().get(0).get(x-1),(Weapons) hero.getEquipment().get(0).get(0));
 
-                                 }// swap sıkıntılı
+                                     }
+                                     else System.out.println("There is no item in the inventory");
+
+
+
+                                 }
                                  else if(option==3){
+                                     hero.getInventory().get(0).indexOfItems(hero.getInventory().get(0));
+                                     if(hero.getInventory().get(0).size()>0){
+                                         int x=GameLogic.getOption("Pick a weapon to drop",hero.getInventory().get(0).size());
+                                         System.out.println(hero.getInventory().get(0).get(x-1).getName()+" removed from inventory");
+                                         hero.getInventory().get(0).remove(x-1);
+
+
+                                     }
+
+
+
+
+                                 }
+                                 else if(option==4){
+                                     flag1=false;
+
+                                 }
+                             }
+
+
+                         }
+                         else if(choice==3){
+                             boolean flag1=true ;
+                             while(flag1){
+                                 int option =GameLogic.getOption("[1]Show clothing inventory\n" +
+                                         "[2]Swap clothing with current clothing\n" +
+                                         "[3]Drop clothing\n" +
+                                         "[4]Return",4);
+                                 if(option==1){
+                                     hero.getInventory().get(1).showInventory(hero.getInventory().get(1));
+                                 }
+                                 else if(option==2){
+                                     hero.getInventory().get(1).indexOfItems(hero.getInventory().get(1));
+                                     if(hero.getInventory().get(1).size()>0){
+                                         int x=GameLogic.getOption("Pick a weapon for swap with current weapon",hero.getInventory().get(1).size());
+                                         hero.getInventory().get(1).swapClothings(hero.getInventory().get(1),hero.getEquipment().get(1),(Clothings) hero.getInventory().get(1).get(x-1),(Clothings) hero.getEquipment().get(1).get(0));
+
+                                     }
+                                     else System.out.println("There is no item in the inventory");
+
+
+
+                                 }
+                                 else if(option==3){
+                                     hero.getInventory().get(1).indexOfItems(hero.getInventory().get(1));
+                                     if(hero.getInventory().get(1).size()>0){
+                                         int x=GameLogic.getOption("Pick a clothing to drop",hero.getInventory().get(1).size());
+                                         System.out.println(hero.getInventory().get(1).get(x-1).getName()+" removed from inventory");
+                                         hero.getInventory().get(1).remove(x-1);
+
+
+                                     }else System.out.println("There is no item to drop");
+
+
+
 
                                  }
                                  else if(option==4){
@@ -115,13 +177,12 @@ public class Main {
 
                 }// add monsters
                 else if(actions.length>1){
-                    if (actions[1].equals("up"))
+                    if(actions[1].equals("up"))
                         hero.moveUpperLevel();
-                }
-                else if(actions.length>1){
-                    if(actions[1].equals("down"))
+                    else if(actions[1].equals("down"))
                         hero.moveLowerLevel();
                 }
+
                 else if(actions[0].equals("rescue")){
 
                 }
@@ -141,17 +202,6 @@ public class Main {
 
 
         }
-
-
-
-
-
-
-
-
-
-
-
 
 
 

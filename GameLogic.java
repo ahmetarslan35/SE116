@@ -18,20 +18,29 @@ public class GameLogic {
         return (Items) items.get(Category).get(index);
 
     }
-    public static Items getItem(int Category,String itemName){
+
+
+    public static Items getWeapon(String itemName){
         Items tempItem = null;
         for (int i = 0; i <items.get(0).size() ; i++) {
             tempItem=(Items) items.get(0).get(i) ;
-            if(tempItem.getName().equals(itemName)){
+            if(tempItem.getName().toLowerCase().equals(itemName)){
                 return tempItem;
             }
         }
+
+        return tempItem;
+
+    }
+    public static Items getClothing(String itemName){
+        Items tempItem = null;
         for (int i = 0; i <items.get(1).size() ; i++) {
-            tempItem =(Items) items.get(1).get(i) ;
+            tempItem=(Items) items.get(1).get(i) ;
             if(tempItem.getName().equals(itemName)){
                 return tempItem;
             }
         }
+
         return tempItem;
 
     }
@@ -86,6 +95,7 @@ public class GameLogic {
 
         return input;
     }
+
 
 
 }

@@ -29,8 +29,8 @@ class LimitedSizedArray extends ArrayList<Items> {
                 limitedArray.remove(weapon2);
                 limitedSizedArray.add(weapon2);
                 limitedArray.add(weapon1);
-                System.out.println("You equipped: "+weapon1);
-                System.out.println(weapon2+" added to your inventory.");
+                System.out.println("You equipped: "+weapon1.getName());
+                System.out.println(weapon2.getName()+" added to your inventory.");
             }
         }
 
@@ -50,4 +50,16 @@ class LimitedSizedArray extends ArrayList<Items> {
 
         }
     }
+
+    public void indexOfItems(LimitedSizedArray limitedSizedArray){
+        int counter =1 ;
+        for (Items item:limitedSizedArray) {
+            System.out.println("["+counter+"]"+item.getName());
+            counter++;
+        }
+
+
+
+    }
 }
+
