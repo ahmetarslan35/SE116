@@ -47,18 +47,23 @@ public class GameLogic {
 
 
     public static void printOptions(Hero hero){
-        System.out.println("----------------");
+        System.out.println();
         System.out.println("Hero :"+hero.getName());
         System.out.println("Current Level:"+hero.getCurrentLevel().getName());
         System.out.println("Current Room:"+hero.getCurrentRoom().getName());
         System.out.println("----------------");
         System.out.println("OPTIONS:");
+        System.out.println("Character Info");
         System.out.println("Open Inventory (open)");
         for (int i = 0; i < hero.getCurrentRoom().arrayList.size(); i++) {
             System.out.println(hero.getCurrentRoom().arrayList.get(i).getName()+"(move r"+hero.getCurrentRoom().arrayList.get(i).getId()+")");
         }
         if(hero.getCurrentRoom().hasAMonster()){
-            System.out.println("Attack Monster");
+            for (int i = 0; i <hero.getCurrentRoom().getMonsterArrayList().size() ; i++) {
+                System.out.println("Monster"+hero.getCurrentRoom().getMonsterArrayList().get(i).getId()+"(attack m"+hero.getCurrentRoom().getMonsterArrayList().get(i).getId()+")");
+
+            }
+
         }
 
         if(hero.getCurrentRoom().hasAUpstairs()){
@@ -95,7 +100,14 @@ public class GameLogic {
 
         return input;
     }
+    public static void printInfo(Hero hero){
+        Weapons weapon =(Weapons)hero.getEquipment().get(0).get(0) ;
+        System.out.println("Health Point :");
+        System.out.println("Total Attack Point :"+(hero.getAttackPoint()+ weapon.getDamage()));
+        System.out.println("Item info :");
 
+
+    }// info eklenecek
 
 
 }

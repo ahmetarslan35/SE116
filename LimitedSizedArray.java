@@ -12,6 +12,7 @@ class LimitedSizedArray extends ArrayList<Items> {
         if (this.size() < n) {
             return super.add(items);
         }
+        else System.out.println("You cannot carry item anymore");
         return false;
     }
 

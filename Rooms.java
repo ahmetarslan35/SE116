@@ -3,29 +3,49 @@ import java.util.ArrayList;
 public class Rooms{
 
 
-    public ArrayList<Rooms>arrayList ;
+    public  ArrayList<Rooms>arrayList ;
+    private ArrayList<Monster>monsterArrayList;
+    private ArrayList<TownsPeople>townsPeopleArrayList;
     private boolean hasAMonster =false;
     private boolean hasAUpstairs = false ;
     private boolean hasADownStairs = false;
     private boolean hasATownsPeople = false ;
     private String name ;
     private int id ;
-
-
-
-
     public Monster monster ;
     public TownsPeople townsPeople ;
 
+
+
+
+
     public Rooms() {
         this.arrayList = new ArrayList<>();
+        this.monsterArrayList =new ArrayList<>();
+        this.townsPeopleArrayList = new ArrayList<>();
+        int x = GameLogic.rand.nextInt(2)+1;
+        for (int i = 0; i < x; i++) {
+            Monster monster= new Monster();
+            monster.setId(i+1);
+            monsterArrayList.add(monster);
+        }
+        if(monsterArrayList.size()>0){
+            hasAMonster = true;
+        }
+
 
 
 
     }
 
 
+    public ArrayList<Monster> getMonsterArrayList() {
+        return monsterArrayList;
+    }
 
+    public ArrayList<TownsPeople> getTownsPeopleArrayList() {
+        return townsPeopleArrayList;
+    }
 
     public int getId() {
         return id;

@@ -16,4 +16,13 @@ public class Clothings extends Items {
     public String getName() {
         return super.getName();
     }
+
+
+    public int getProtectionRate() {
+        return protectionRate;
+    }
+
+    public void setProtectionRate(int protectionRate) {
+        this.protectionRate = protectionRate;
+    }
 }

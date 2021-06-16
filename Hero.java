@@ -22,7 +22,8 @@ public class Hero  extends Characters {
 
     public Hero() {
 
-        this.healthPoint = 50 ;
+        this.healthPoint = GameLogic.rand.nextInt(100)+50 ;
+        this.attackPoint = GameLogic.rand.nextInt(40)+30;
         Inventory = new ArrayList<>();
         Equipment = new ArrayList<>();
         LimitedSizedArray Weapons = new LimitedSizedArray();
@@ -101,7 +102,8 @@ public class Hero  extends Characters {
         }
 
 
-        System.out.println("Hero moved "+exRoom+" to "+currentRoom.getName()+".");
+        if(!exRoom.equals(currentRoom.getName()))
+            System.out.println("Hero moved "+exRoom+" to "+currentRoom.getName()+".");
 
 
 
@@ -131,6 +133,16 @@ public class Hero  extends Characters {
 
 
 
+    }
+
+    public Monster chooseMonster(String monsterName){
+        int monsterID = Integer.parseInt(monsterName.substring(1));
+        for (int i = 0; i < currentRoom.getMonsterArrayList().size(); i++) {
+            if(currentRoom.getMonsterArrayList().get(i).getId()==monsterID){
+                return currentRoom.getMonsterArrayList().get(i) ;
+            }
+        }
+        return null;
     }
 
 
