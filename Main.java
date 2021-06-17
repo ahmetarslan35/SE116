@@ -40,6 +40,7 @@ public class Main {
             System.out.println("-----HERO OF THE DUNGEON------");
             Hero hero = new Hero();
             System.out.println("Enter name :");
+
             String name = GameLogic.scanner.nextLine();
             hero.setName(name);
             System.out.println();
@@ -49,14 +50,18 @@ public class Main {
             hero.getInventory().get(1).add(lightClothing);
 
             while(inGame){
+
                 GameLogic.printOptions(hero);
                 String action =GameLogic.scanner.nextLine();
+                if(action.equals("")){
+                    action= GameLogic.scanner.nextLine();
+                }
                 String[]actions = action.toLowerCase().split(" ",5) ;
-                if(actions.length==0){
-                    switch (actions[0]) {
-                        case "open" -> {
-                            boolean exit = true;
-                            while (exit) {
+
+
+                if(actions[0].equals("open")) {
+                    boolean exit = true;
+                    while (exit) {
                                 choice = GameLogic.getOption("""
                                         [1]Equitments on Hero
                                         [2]Weapon Inventory
@@ -146,11 +151,13 @@ public class Main {
 
 
                             } // inventory loop
-                        }
-                        case "exit" -> System.exit(0);
-                        case "info" -> GameLogic.printInfo(hero);
-                    }
                 }
+                else if(actions[0].equals("exit"))
+                    System.exit(0);
+                else if(actions[0].equals("info"))
+                    GameLogic.printInfo(hero);
+
+
                 else if(actions.length>1){
                     if(hero.getCurrentRoom().hasAUpstairs() && actions[1].equals("up"))
                         hero.moveUpperLevel();
@@ -164,35 +171,35 @@ public class Main {
                     else if(actions[0].equals("attack") && actions[1].contains("m") && hero.chooseMonster(actions[1])!= null){
                         Monster monster =hero.chooseMonster(actions[1]);
                         int monsterHp = monster.getHealthPoint();
-                        int monsterAp = monster.getAttackPoint();
+
                         int heroHealthPoint = hero.getHealthPoint();
                         Weapons heroWeapon = (Weapons) hero.getEquipment().get(0).get(0);
                         Clothings heroClothing = (Clothings) hero.getEquipment().get(1).get(0);
 
                         int heroAttackPoint =hero.getAttackPoint()+heroWeapon.getDamage();
-                        int heroProtection = heroClothing.getProtectionRate();
+                        boolean returnRoom =false;
 
-                        System.out.println("Your HP :"+heroHealthPoint);
-                        System.out.println("Monsters HP:"+monsterHp);
+
                         while (monsterHp>0){
-                            choice =GameLogic.getOption("[1]Attack\n" +
+                            System.out.println("Your HP :"+heroHealthPoint);
+                            System.out.println("Monsters HP:"+monsterHp);
+
+                            int x=GameLogic.getOption("[1]Attack\n" +
                                     "[2]Return Room",2);
-                            if(choice==1){
-                                heroHealthPoint=monsterAp-heroProtection;
+                            if(x==1){
+                                heroHealthPoint=heroHealthPoint-(monster.getAttackPoint()-heroClothing.getProtectionRate());
                                 monsterHp-=heroAttackPoint;
                                 hero.setHealthPoint(heroHealthPoint);
                                 monster.setHealthPoint(monsterHp);
-                                System.out.println(monsterAp+" damage received and you deal "+heroAttackPoint);
-
-
-
+                                System.out.println(monster.getAttackPoint()-heroClothing.getProtectionRate()+" damage received and you deal "+heroAttackPoint);
 
 
                             }
-                            else if(choice==2){
+                            else if(x==2){
+                                returnRoom = true;
                                     break;
                             }
-                            if(heroHealthPoint<1){
+                            if(hero.getHealthPoint()<1){
                                 int option = GameLogic.getOption("[1]Restart [2]Exit",2);
                                 if(option==1){
                                     inGame =false;
@@ -211,18 +218,25 @@ public class Main {
 
 
                         }
-                        if(heroHealthPoint>0){
+                        if(heroHealthPoint>0 && !returnRoom){
+                            System.out.println("You killed Monster"+monster.getId());
+                            hero.getCurrentRoom().getMonsterArrayList().remove(monster);
+                            if(hero.getCurrentRoom().getMonsterArrayList().size()==0){
+                                hero.getCurrentRoom().setHasAMonster(false);
+
+                            }
 
                         }
 
 
 
                     }
-                    else if(actions[0].equals("rescue")){
+                    else if(actions[0].equals("rescue") ){
 
                     }
                 }
-                else System.out.println("INVALID!!!");
+
+                }
 
 
 
@@ -239,5 +253,5 @@ public class Main {
 
 
 
-    }
-}
+ }
+

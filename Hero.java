@@ -12,6 +12,8 @@ public class Hero  extends Characters {
     private ArrayList<LimitedSizedArray> Inventory ;
     private ArrayList<LimitedArray> Equipment ;
 
+
+
     public ArrayList<LimitedArray> getEquipment() {
         return Equipment;
     }
@@ -30,9 +32,11 @@ public class Hero  extends Characters {
         LimitedSizedArray Clothings= new LimitedSizedArray();
         LimitedArray Weapon = new LimitedArray();
         LimitedArray Clothing = new LimitedArray();
+        LimitedSizedArray ValuableItems = new LimitedSizedArray();
 
         Inventory.add(Weapons);
         Inventory.add(Clothings);
+        Inventory.add(ValuableItems);
         Equipment.add(Weapon);
         Equipment.add(Clothing);
         Weapon.add(GameLogic.getItem(0,0));
