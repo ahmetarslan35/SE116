@@ -23,6 +23,7 @@ public class Level {
     public ArrayList<Rooms> allRooms ;
 
 
+
     public int getCorridorAmount() {
         return corridorAmount;
         
@@ -104,7 +105,7 @@ public class Level {
 
 
 
-        if(levelNumber<16){
+        if(levelNumber<17){
             Corridor tempCorridor = tempLevel.corridorArrayList.get(GameLogic.rand.nextInt(tempLevel.getCorridorAmount()));
             x =GameLogic.rand.nextInt(tempCorridor.roomsArrayList.size());
             tempCorridor.roomsArrayList.get(x).setHasAUpstairs(true);

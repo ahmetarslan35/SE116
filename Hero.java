@@ -14,6 +14,7 @@ public class Hero  extends Characters {
 
 
 
+
     public ArrayList<LimitedArray> getEquipment() {
         return Equipment;
     }
@@ -117,9 +118,12 @@ public class Hero  extends Characters {
     public void moveUpperLevel() {
         String exLevel =currentLevel.getName();
         int i = Dungeon.indexOf(currentLevel);
+        if(i!=16){
+            this.currentLevel =  Dungeon.get(i+1);
+            System.out.println("Hero moved "+exLevel+" to "+currentLevel.getName()+".");
 
-        this.currentLevel =  Dungeon.get(i+1);
-        System.out.println("Hero moved "+exLevel+" to "+currentLevel.getName()+".");
+        }
+
         this.currentRoom = currentLevel.allRooms.get(0);
 
 

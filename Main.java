@@ -16,9 +16,18 @@ public class Main {
         Clothings lightClothing = new Clothings("Light Clothing", 6, 5, 10);
         Clothings leatherArmor = new Clothings("Leather Armor", 7, 7, 15);
         Clothings chainmailArmor = new Clothings("Chainmail Armor", 10, 9, 20);
+        ValuableItems goldenRing = new ValuableItems("Golden Ring",400,2);
+        ValuableItems diamond = new ValuableItems("Diamond",1000,3);
+        ValuableItems ancientBracelet = new ValuableItems("Ancient Bracelet",2000,10);
+        ValuableItems bronzeNecklace = new ValuableItems("Bronze Necklace",200,1);
+        ValuableItems pearl = new ValuableItems("Pearl",1500,1);
+
+
+
 
         GameLogic.items.add(GameLogic.allWeapons);
         GameLogic.items.add(GameLogic.allClothings);
+        GameLogic.items.add(GameLogic.valuableItems);
         GameLogic.allWeapons.add(dagger);
         GameLogic.allWeapons.add(smallAxe);
         GameLogic.allWeapons.add(axe);
@@ -31,6 +40,12 @@ public class Main {
         GameLogic.allClothings.add(lightClothing);
         GameLogic.allClothings.add(leatherArmor);
         GameLogic.allClothings.add(chainmailArmor);
+        GameLogic.valuableItems.add(goldenRing);
+        GameLogic.valuableItems.add(diamond);
+        GameLogic.valuableItems.add(ancientBracelet);
+        GameLogic.valuableItems.add(bronzeNecklace);
+        GameLogic.valuableItems.add(pearl);
+
 
         boolean inGame ;
         int choice ;
@@ -39,15 +54,15 @@ public class Main {
             inGame =true;
             System.out.println("-----HERO OF THE DUNGEON------");
             Hero hero = new Hero();
+
             System.out.println("Enter name :");
 
             String name = GameLogic.scanner.nextLine();
+            if(name.equals(""))
+                name = GameLogic.scanner.nextLine();
             hero.setName(name);
             System.out.println();
-            hero.getInventory().get(0).add(broadAxe);
-            hero.getInventory().get(0).add(shortBow);
-            hero.getInventory().get(1).add(leatherArmor);
-            hero.getInventory().get(1).add(lightClothing);
+            int baseHealth =hero.getHealthPoint();
 
             while(inGame){
 
@@ -61,16 +76,18 @@ public class Main {
 
                 if(actions[0].equals("open")) {
                     boolean exit = true;
-                    while (exit) {
-                                choice = GameLogic.getOption("""
-                                        [1]Equitments on Hero
+                    while (exit){
+                        choice = GameLogic.getOption("""
+                                        [1]Equipments on Hero
                                         [2]Weapon Inventory
                                         [3]Clothing Inventory
-                                        [4]Exit""", 4);
-                                if (choice == 1) {
-                                    hero.getEquipment().get(0).showEquipments(hero.getEquipment().get(0));
-                                    hero.getEquipment().get(0).showEquipments(hero.getEquipment().get(1));
-                                } else if (choice == 2) {
+                                        [4]Valuable Items Inventory
+                                        [5]Exit""", 5);
+                        if (choice == 1) {
+                            hero.getEquipment().get(0).showEquipments(hero.getEquipment().get(0));
+                            hero.getEquipment().get(0).showEquipments(hero.getEquipment().get(1));
+                        }
+                        else if (choice == 2) {
                                     boolean flag1 = true;
                                     while (flag1) {
                                         int option = GameLogic.getOption("""
@@ -107,7 +124,8 @@ public class Main {
                                     }
 
 
-                                } else if (choice == 3) {
+                                }
+                        else if (choice == 3) {
                                     boolean flag1 = true;
                                     while (flag1) {
                                         int option = GameLogic.getOption("""
@@ -144,28 +162,113 @@ public class Main {
                                     }
 
 
-                                } else if (choice == 4) {
-                                    exit = false;
+                                }
+                        else if (choice == 4) {
+                            boolean flag1 = true;
+                            while (flag1) {
+                                int option = GameLogic.getOption("""
+                                                [1]List items
+                                                [2]Return""", 2);
+                                if (option == 1) {
+                                    hero.getInventory().get(2).showInventory(hero.getInventory().get(2));
+                                }
+                                else if (option == 2) {
+                                    flag1 = false;
 
                                 }
+                            }
 
 
-                            } // inventory loop
+                        }
+                        else if (choice == 5)
+                            exit = false;
+
+
+
+
+                    } // inventory loop
                 }
                 else if(actions[0].equals("exit"))
                     System.exit(0);
                 else if(actions[0].equals("info"))
-                    GameLogic.printInfo(hero);
+                    GameLogic.printInfo(hero,pointCalculator);
+                else if(actions[0].equals("rescue") ){
+                    if(!hero.getCurrentRoom().hasAMonster()){
+                        System.out.println("He is very pleasant for being rescued");
+                        int x = GameLogic.rand.nextInt(101);
+                        if(x<71){
+                            ValuableItems valuableItems =(ValuableItems) GameLogic.items.get(2).get(GameLogic.rand.nextInt(GameLogic.items.get(2).size()));
+                            System.out.println("He is dying because of his wounds and he wants to give you "+valuableItems.getName());
+                            System.out.println("This precious item seems very valuable");
+                            int anInt = GameLogic.getOption("[1]Take [2]Move on",2);
+                            if(anInt==1){
+                                hero.getInventory().get(2).add(valuableItems);
+                            }
 
+                        }
+                        if(x>70 && x<81){
+                            Weapons weapons =(Weapons) GameLogic.items.get(0).get(GameLogic.rand.nextInt(GameLogic.items.get(0).size()));
+                            System.out.println("He felt very indebted and he wants to give you "+weapons.getName());
+                            System.out.println("This weapon was his father's and he says it may help you through your journey");
+                            int anInt = GameLogic.getOption("[1]Take [2]Move on",2);
+                            if(anInt==1){
+                                hero.getInventory().get(0).add(weapons);
+                            }
+
+
+
+
+
+                        }
+                        if(x>80 && x<91){
+                            Clothings clothings =(Clothings) GameLogic.items.get(1).get(GameLogic.rand.nextInt(GameLogic.items.get(1).size()));
+                            System.out.println("He felt very indebted and he wants to give you "+clothings.getName());
+                            System.out.println("This item may protect you from some of the possible dangers");
+                            int anInt = GameLogic.getOption("[1]Take [2]Move on",2);
+                            if(anInt==1){
+                                hero.getInventory().get(1).add(clothings);
+                            }
+
+
+                        }
+                        System.out.println("...and he gives you a bandage to heal yourself");
+                        hero.setHealthPoint(baseHealth);
+                        System.out.println("+400 points for rescuing folks");
+                        hero.getCurrentRoom().setHasATownsPeople(false);
+
+
+
+
+                    }
+                    else System.out.println("You cannot rescue townspeople until the room was cleaned");
+
+                }
 
                 else if(actions.length>1){
-                    if(hero.getCurrentRoom().hasAUpstairs() && actions[1].equals("up"))
-                        hero.moveUpperLevel();
+                    if(hero.getCurrentRoom().hasAUpstairs() && actions[1].equals("up") && actions[1].length()>1){
+                        int anInt = GameLogic.levelID(hero);
+                        if(anInt ==16){
+                            System.out.println("YOU WON!!!");
+                            System.out.println();
+                            pointCalculator+=GameLogic.calculatePoint(hero);
+                            System.out.println("PLAYER:"+hero.getName());
+                            System.out.println("TOTAL SCORE :"+pointCalculator);
+                            int decision = GameLogic.getOption("[1]Restart [2]Quit",2);
+                            if(decision==1){
+                                break;
+                            }
+                            if(decision==2)
+                                System.exit(1);
 
-                    else if(hero.getCurrentRoom().hasADownStairs()&& actions[1].equals("down"))
+                        }
+                        else hero.moveUpperLevel();
+                    }
+
+
+                    else if(hero.getCurrentRoom().hasADownStairs()&& actions[1].equals("down") && actions[1].length()>1)
                         hero.moveLowerLevel();
 
-                    else if(actions[0].equals("move") && actions[1].contains("r")){
+                    else if(actions[0].equals("move") && actions[1].contains("r") && actions[1].length()>1){
                         hero.move(actions[1]);
                     }
                     else if(actions[0].equals("attack") && actions[1].contains("m") && hero.chooseMonster(actions[1])!= null){
@@ -197,9 +300,14 @@ public class Main {
                             }
                             else if(x==2){
                                 returnRoom = true;
-                                    break;
+                                break;
                             }
                             if(hero.getHealthPoint()<1){
+                                System.out.println("GAME OVER!!!!");
+                                System.out.println();
+                                pointCalculator+=GameLogic.calculatePoint(hero);
+                                System.out.println("PLAYER:"+hero.getName());
+                                System.out.println("TOTAL SCORE :"+pointCalculator);
                                 int option = GameLogic.getOption("[1]Restart [2]Exit",2);
                                 if(option==1){
                                     inGame =false;
@@ -208,7 +316,6 @@ public class Main {
                                 }
                                 if(option==2)
                                     System.exit(0);
-                                // puanlama eklenecek
                             }
 
 
@@ -223,17 +330,52 @@ public class Main {
                             hero.getCurrentRoom().getMonsterArrayList().remove(monster);
                             if(hero.getCurrentRoom().getMonsterArrayList().size()==0){
                                 hero.getCurrentRoom().setHasAMonster(false);
+                                System.out.println("+100 points for cleaning room");
+                                pointCalculator+=100;
 
                             }
+                            int x = GameLogic.rand.nextInt(101);
+                            if(x<51){
+                                int possibility =GameLogic.rand.nextInt(GameLogic.items.get(2).size());
+                                ValuableItems valuableItems =(ValuableItems) GameLogic.items.get(2).get(possibility);
+                                System.out.println("Monster dropped "+valuableItems.getName());
+                                int anInt = GameLogic.getOption("[1]Take [2]Move on",2);
+                                if(anInt==1){
+                                    hero.getInventory().get(2).add(valuableItems);
+                                }
+
+
+                            }
+                            if(x<61&& x>50){
+                                int possibility= GameLogic.rand.nextInt(GameLogic.items.get(0).size());
+
+                                Weapons weapons =(Weapons) GameLogic.items.get(0).get(possibility);
+                                System.out.println("Monster dropped "+weapons.getName());
+                                int anInt = GameLogic.getOption("[1]Take [2]Move on",2);
+                                if(anInt==1){
+                                    hero.getInventory().get(0).add(weapons);
+                                }
+
+                            }
+                            if(x>60 &&x<71){
+                                int possibility= GameLogic.rand.nextInt(GameLogic.items.get(1).size());
+
+                                Clothings clothings =(Clothings) GameLogic.items.get(1).get(possibility);
+                                System.out.println("Monster dropped "+clothings.getName());
+                                int anInt = GameLogic.getOption("[1]Take [2]Move on",2);
+                                if(anInt==1){
+                                    hero.getInventory().get(1).add(clothings);
+                                }
+
+                            }
+
 
                         }
 
 
 
                     }
-                    else if(actions[0].equals("rescue") ){
 
-                    }
                 }
 
                 }

@@ -4,6 +4,7 @@ public class Corridor {
     public ArrayList<Rooms> roomsArrayList;
 
 
+
     private int roomAmount ;
 
     public void setRoomAmount(int roomAmount) {
