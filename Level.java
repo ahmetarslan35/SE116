@@ -1,5 +1,5 @@
 import java.util.ArrayList;
-import java.util.HashMap;
+
 
 public class Level {
 
@@ -9,7 +9,7 @@ public class Level {
 
     private static int levelNumber = 1;
     private String name ;
-    private HashMap<String,String>RoomID = new HashMap<>();
+
 
     public String getName() {
         return name;
@@ -128,7 +128,7 @@ public class Level {
         int townspeopleAmount = (sum-(sum%3))/3;
         for(int i =1; i <=townspeopleAmount;i++){
             TownsPeople townsPeople = new TownsPeople() ;
-            townsPeople.setId(i);
+
             int y = GameLogic.rand.nextInt(counter);
 
             tempLevel.allRooms.get(y).getTownsPeopleArrayList().add(townsPeople);

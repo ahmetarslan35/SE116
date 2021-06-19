@@ -1,5 +1,7 @@
+import java.io.IOException;
+
 public class Main {
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException {
         int pointCalculator = 0 ;
 
         Weapons dagger = new Weapons("Dagger", 4, 4, 7, 2);
@@ -47,6 +49,8 @@ public class Main {
         GameLogic.valuableItems.add(pearl);
 
 
+
+
         boolean inGame ;
         int choice ;
 
@@ -54,6 +58,31 @@ public class Main {
             inGame =true;
             System.out.println("-----HERO OF THE DUNGEON------");
             Hero hero = new Hero();
+
+
+
+            while (true){
+                int Int =GameLogic.getOption("""
+                    [1]START GAME\s
+                    [2]LEADERBOARD\s
+                    [3]CREDIT
+                    [4]EXIT""",4);
+                if(Int==1){
+                    break;
+                }
+                else if(Int==2){
+                    highScoreFile.readRecords();
+                    System.out.println();
+                }
+                else if(Int==3){
+                    credit();
+                }
+                else if(Int==4){
+                    System.exit(1);
+                }
+
+            }
+
 
             System.out.println("Enter name :");
 
@@ -245,33 +274,58 @@ public class Main {
                 }
 
                 else if(actions.length>1){
-                    if(hero.getCurrentRoom().hasAUpstairs() && actions[1].equals("up") && actions[1].length()>1){
+                    if(actions[0].equals("move")&&hero.getCurrentRoom().hasAUpstairs() && actions[1].equals("up")){
                         int anInt = GameLogic.levelID(hero);
                         if(anInt ==16){
                             System.out.println("YOU WON!!!");
                             System.out.println();
                             pointCalculator+=GameLogic.calculatePoint(hero);
+                            hero.setScore(pointCalculator);
+                            highScoreFile.writeFile(hero);
+                            highScoreFile.sortFile();
                             System.out.println("PLAYER:"+hero.getName());
-                            System.out.println("TOTAL SCORE :"+pointCalculator);
+                            System.out.println("TOTAL SCORE :"+hero.getScore());
                             int decision = GameLogic.getOption("[1]Restart [2]Quit",2);
                             if(decision==1){
                                 break;
                             }
-                            if(decision==2)
+                            if(decision==2){
+                                System.out.println("THANKS  FOR PLAYING!!!");
                                 System.exit(1);
+                            }
+
 
                         }
                         else hero.moveUpperLevel();
                     }
-
-
-                    else if(hero.getCurrentRoom().hasADownStairs()&& actions[1].equals("down") && actions[1].length()>1)
+                    
+                    else if(actions[0].equals("move ") && hero.getCurrentRoom().hasADownStairs()&& actions[1].equals("down"))
                         hero.moveLowerLevel();
 
-                    else if(actions[0].equals("move") && actions[1].contains("r") && actions[1].length()>1){
-                        hero.move(actions[1]);
+                    else if(actions[0].equals("move") && actions[1].contains("r") && actions[1].length()<3){
+                        boolean isOkey ;
+                        try {
+                            Integer.parseInt(actions[1].substring(1));
+                            isOkey =true ;
+                        }catch (NumberFormatException numberFormatException){
+                            isOkey = false;
+
+                        }
+                        if(isOkey)
+                            hero.move(actions[1]);
                     }
-                    else if(actions[0].equals("attack") && actions[1].contains("m") && hero.chooseMonster(actions[1])!= null){
+                    else if(actions[0].equals("attack") && actions[1].contains("m") && hero.chooseMonster(actions[1])!= null && actions[1].length()<3){
+                        boolean isOkey ;
+                        try {
+                            Integer.parseInt(actions[1].substring(1));
+                            isOkey =true ;
+                        }catch (NumberFormatException numberFormatException){
+                            isOkey = false;
+
+                        }
+                        if(isOkey){
+
+
                         Monster monster =hero.chooseMonster(actions[1]);
                         int monsterHp = monster.getHealthPoint();
 
@@ -306,16 +360,23 @@ public class Main {
                                 System.out.println("GAME OVER!!!!");
                                 System.out.println();
                                 pointCalculator+=GameLogic.calculatePoint(hero);
+                                hero.setScore(pointCalculator);
+                                highScoreFile.writeFile(hero);
+                                highScoreFile.sortFile();
                                 System.out.println("PLAYER:"+hero.getName());
-                                System.out.println("TOTAL SCORE :"+pointCalculator);
+                                System.out.println("TOTAL SCORE :"+hero.getScore());
                                 int option = GameLogic.getOption("[1]Restart [2]Exit",2);
                                 if(option==1){
                                     inGame =false;
                                     break;
 
                                 }
-                                if(option==2)
+                                if(option==2){
+                                    System.out.println("THANKS  FOR PLAYING!!!");
                                     System.exit(0);
+
+                                }
+
                             }
 
 
@@ -370,7 +431,7 @@ public class Main {
                             }
 
 
-                        }
+                        }}
 
 
 
@@ -389,11 +450,13 @@ public class Main {
             }
 
 
+
         }
 
+    private static void credit() {
+        System.out.println("CREATED BY EMRE,AHMET,DOGA.");
+    }
 
 
-
-
- }
+}
 

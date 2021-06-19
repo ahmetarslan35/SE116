@@ -7,9 +7,6 @@ public class Corridor {
 
     private int roomAmount ;
 
-    public void setRoomAmount(int roomAmount) {
-        this.roomAmount = roomAmount;
-    }
 
     public int getRoomAmount() {
         return roomAmount;

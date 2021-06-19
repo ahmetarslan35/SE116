@@ -12,10 +12,6 @@ public class Monster extends Characters {
         return attackPoint;
     }
 
-    public void setAttackPoint(int attackPoint) {
-        this.attackPoint = attackPoint;
-    }
-
     public int getHealthPoint() {
         return healthPoint;
     }

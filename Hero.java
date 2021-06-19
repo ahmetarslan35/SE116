@@ -4,9 +4,12 @@ public class Hero  extends Characters {
 
     private String name ;
     private int healthPoint ;
-    private int attackPoint ;
+    private final int attackPoint ;
     private Rooms currentRoom  ;
     private Level currentLevel ;
+    private int score ;
+
+
 
     private ArrayList<Level>  Dungeon = new ArrayList<>();
     private ArrayList<LimitedSizedArray> Inventory ;
@@ -56,15 +59,16 @@ public class Hero  extends Characters {
         this.currentRoom =Dungeon.get(0).allRooms.get(0);
         this.currentLevel = Dungeon.get(0);
     }
+    public int getScore() {
+        return score;
+    }
 
+    public void setScore(int score) {
+        this.score = score;
+    }
     public int getAttackPoint() {
         return attackPoint;
     }
-
-    public void setAttackPoint(int attackPoint) {
-        this.attackPoint = attackPoint;
-    }
-
 
 
     public Rooms getCurrentRoom() {

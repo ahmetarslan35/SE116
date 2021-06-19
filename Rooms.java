@@ -12,9 +12,6 @@ public class Rooms{
     private boolean hasATownsPeople = false ;
     private String name ;
     private int id ;
-    public Monster monster ;
-    public TownsPeople townsPeople ;
-
 
 
 
@@ -101,12 +98,7 @@ public class Rooms{
         arrayList.add(tempRoom);
 
     }
-    public void printPossibleRooms(){
-        System.out.println("Room :"+getName());
-        for (Rooms rooms : arrayList) {
-            System.out.println(rooms.getName());
-        }
-    }
+
 
 
 

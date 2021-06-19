@@ -22,7 +22,4 @@ public class Clothings extends Items {
         return protectionRate;
     }
 
-    public void setProtectionRate(int protectionRate) {
-        this.protectionRate = protectionRate;
-    }
 }
