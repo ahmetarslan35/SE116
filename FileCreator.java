@@ -1,7 +1,7 @@
 import java.io.FileNotFoundException;
 import java.util.Formatter;
 import java.util.FormatterClosedException;
-import java.util.Scanner;
+
 
 public class FileCreator {
     private static Formatter output ;
@@ -13,9 +13,6 @@ public class FileCreator {
     }
 
     public static void addRecords(Hero hero ,int points) {
-
-
-
 
 
         try {
